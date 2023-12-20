@@ -36,17 +36,17 @@ Here are some examples of how to use the program:
 
 - Send a GET request to a URL:
     ```
-    python main.py https://example.com
+    python3 main.py -v -X GET https://example.com/get
     ```
 
 - Send a POST request with data and headers:
     ```
-    python main.py -X POST -d "Hello, World!" -H "Content-Type: text/plain" https://example.com
+    python3 main.py -v -X POST https://example.com/post -d '{"key": "value"}' -H "Content-Type: application/json"
     ```
 
 - Enable verbose output:
     ```
-    python main.py -v https://example.com
+    python3 main.py -v https://example.com/get
     ```
 
 ## License
