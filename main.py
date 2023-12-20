@@ -3,7 +3,7 @@ import argparse
 from urllib.parse import urlparse
 
 
-def build_request_header(method, urlparsed, header=None, data=None) -> str:
+def build_request(method, urlparsed, header=None, data=None) -> str:
     request_header = f"{method} {urlparsed.path} HTTP/1.1\r\n"
     request_header += f"Host: {urlparsed.hostname}\r\n"
     request_header += "User-Agent: curl/8.1.2\r\n"
@@ -16,12 +16,10 @@ def build_request_header(method, urlparsed, header=None, data=None) -> str:
                 request_header += f"{h}\r\n"
 
         if data:
-            request_header += f"Content-Length: {len(data)}\r\n"
-            request_header += "\r\n"
-            request_header += f"{data}\r\n"
+            request_header += f"Content-Length: {len(data)}\r\n\r\n"
+            request_body = f"{data}\r\n\r\n"
 
-    request_header += "\r\n"
-    return request_header
+    return request_header + request_body if method in ['POST', 'PUT', 'PATCH'] else request_header + "\r\n"
 
 
 def send_request(urlparsed, request_header) -> bytes:
@@ -73,7 +71,7 @@ def main() -> None:
 
     urlparsed = urlparse(url)
 
-    request_header = build_request_header(method, urlparsed, header, data)
+    request_header = build_request(method, urlparsed, header, data)
     response = send_request(urlparsed, request_header)
     parse_response(request_header, response, verbose)
 
