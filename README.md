@@ -2,7 +2,7 @@
 
 This is a simple curl-like HTTP client implemented in Python. It allows you to send HTTP requests to a specified URL and receive the response.
 
-This program was created based on the challenge on the Coding Challanges website: https://codingchallenges.fyi/challenges/challenge-curl
+I created this program was designed based on a challenge on the "Coding Challenges" website: https://codingchallenges.fyi/challenges/challenge-curl
 
 ## Usage
 
